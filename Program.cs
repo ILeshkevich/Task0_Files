@@ -24,7 +24,7 @@ namespace GithubFiles
 
             Git.Log(path, filesChanges);
 
-            Print(Sort());
+            Printer.Print(Sorter.Sort(filesChanges));
 
             DeleteDirectory(path);
         }
@@ -55,21 +55,9 @@ namespace GithubFiles
             Directory.Delete(directoryPath,false);
         }
 
-        private static void Print(Dictionary<string,int> files)
-        {
-            foreach (var file in files)
-            {
-                int i = 1;
-                Console.WriteLine($"{i + 1}:{file.Key} -- {file.Value}");
-                if (i == 10) break;
-            }
-        }
+        
 
-        private static Dictionary<string,int> Sort()
-        {
-            var files = filesChanges.GroupBy(fC => fC).Select(f => new { Key = f.Key, Count = f.Count() });
-            return files.OrderByDescending(a => a.Key).ToDictionary(o => o.Key, o => o.Count);
-        }
+        
     
     }
 }
