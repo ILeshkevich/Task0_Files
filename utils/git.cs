@@ -29,18 +29,36 @@ namespace GithubFiles.utils
 
         static public void Log(string path, List<string> files)
         {
-            using (var repo = new Repository(path))
+            try
             {
-                foreach (var commit in repo.Commits)
+                using (var repo = new Repository(path))
                 {
-                    foreach (var parent in commit.Parents)
+                    foreach (var commit in repo.Commits)
                     {
-                        foreach (TreeEntryChanges change in repo.Diff.Compare<TreeChanges>(parent.Tree, commit.Tree))
+                        foreach (var parent in commit.Parents)
                         {
-                            files.Add(change.Path);
+                            foreach (TreeEntryChanges change in repo.Diff.Compare<TreeChanges>(parent.Tree, commit.Tree))
+                            {
+                                files.Add(change.Path);
+                            }
+                        }
+                        if (files.Count == 0)
+                        {
+                            foreach (var file in commit.Tree)
+                            {
+                                files.Add(file.Path);
+                            }
                         }
                     }
+                   
                 }
+                
+            }
+            catch (Exception e)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
             }
         }
     }

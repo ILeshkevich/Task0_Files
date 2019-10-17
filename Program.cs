@@ -21,14 +21,11 @@ namespace GithubFiles
             var url = Console.ReadLine();
 
             Git.Clone(url,login,pass,path);
+
             Git.Log(path, filesChanges);
 
-            var files = filesChanges.GroupBy(fC => fC).Select(f => new { Key = f.Key, Count = f.Count() }).ToList();
-            files = files.OrderByDescending(f => f.Count).ToList();
-            for (int i = 0; i < (files.Count>10?10:files.Count); i++)
-            {
-                Console.WriteLine($"{i+1}:{files[i].Key} -- {files[i].Count}");
-            }
+            Print(Sort());
+
             DeleteDirectory(path);
         }
 
@@ -57,5 +54,22 @@ namespace GithubFiles
 
             Directory.Delete(directoryPath,false);
         }
+
+        private static void Print(Dictionary<string,int> files)
+        {
+            foreach (var file in files)
+            {
+                int i = 1;
+                Console.WriteLine($"{i + 1}:{file.Key} -- {file.Value}");
+                if (i == 10) break;
+            }
+        }
+
+        private static Dictionary<string,int> Sort()
+        {
+            var files = filesChanges.GroupBy(fC => fC).Select(f => new { Key = f.Key, Count = f.Count() });
+            return files.OrderByDescending(a => a.Key).ToDictionary(o => o.Key, o => o.Count);
+        }
+    
     }
 }
