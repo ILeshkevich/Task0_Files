@@ -9,7 +9,7 @@ namespace GithubFiles.utils
         public static Dictionary<string, int> Sort(List<string> filesChanges)
         {
             var files = filesChanges.GroupBy(fC => fC).Select(f => new { Key = f.Key, Count = f.Count() });
-            return files.OrderByDescending(a => a.Key).ToDictionary(o => o.Key, o => o.Count);
+            return files.OrderByDescending(a => a.Count).ToDictionary(o => o.Key, o => o.Count);
         }
     }
 }

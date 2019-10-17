@@ -8,11 +8,12 @@ namespace GithubFiles.utils
     {
         public static void Print(Dictionary<string, int> files)
         {
+            int i = 1;
             foreach (var file in files)
             {
-                int i = 1;
-                Console.WriteLine($"{i + 1}:{file.Key} -- {file.Value}");
+                Console.WriteLine($"{i}:{file.Key} -- {file.Value}");
                 if (i == 10) break;
+                i++;
             }
         }
     }
