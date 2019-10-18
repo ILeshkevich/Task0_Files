@@ -15,4 +15,7 @@
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)libgit2sharp.nativebinaries\2.0.289\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('$(NuGetPackageRoot)libgit2sharp.nativebinaries\2.0.289\build\LibGit2Sharp.NativeBinaries.props')" />
   </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgStyleCop_Analyzers Condition=" '$(PkgStyleCop_Analyzers)' == '' ">C:\Users\i.leshkevich\.nuget\packages\stylecop.analyzers\1.1.118</PkgStyleCop_Analyzers>
+  </PropertyGroup>
 </Project>

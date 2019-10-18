@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GithubFiles", "GithubFiles.csproj", "{B89771F0-FE6D-4ACF-A80C-4FBCFBA0B8A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubFilesTest", "..\GithubFilesTest\GithubFilesTest.csproj", "{8A32C337-7B9D-4CB2-A036-50460266D6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GithubFilesTest", "..\GithubFilesTest\GithubFilesTest.csproj", "{8A32C337-7B9D-4CB2-A036-50460266D6BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{5F8CBCC3-2694-42DE-9733-E99357BD8D4E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		default.ruleset = default.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

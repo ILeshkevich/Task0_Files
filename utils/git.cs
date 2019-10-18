@@ -1,19 +1,17 @@
-﻿using LibGit2Sharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using LibGit2Sharp;
 
-namespace GithubFiles.utils
+namespace GithubFiles.Utils
 {
-    class Git
+    public class Git
     {
-        static public void Clone(string url, string login, string pass, string path)
+        public static void Clone(string url, string login, string pass, string path)
         {
             try
             {
                 var co = new CloneOptions();
-                co.CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials { Username = login, Password = pass };
+                co.CredentialsProvider = (url1, user, cred) => new UsernamePasswordCredentials { Username = login, Password = pass };
                 Console.WriteLine("Cloning...");
                 Repository.Clone(url, path, co);
                 Console.WriteLine("Comlite");
@@ -26,8 +24,7 @@ namespace GithubFiles.utils
             }
         }
 
-
-        static public void Log(string path, List<string> files)
+        public static void Log(string path, List<string> files)
         {
             try
             {
@@ -42,6 +39,7 @@ namespace GithubFiles.utils
                                 files.Add(change.Path);
                             }
                         }
+
                         if (files.Count == 0)
                         {
                             foreach (var file in commit.Tree)
@@ -50,9 +48,7 @@ namespace GithubFiles.utils
                             }
                         }
                     }
-                   
                 }
-                
             }
             catch (Exception e)
             {
@@ -63,5 +59,3 @@ namespace GithubFiles.utils
         }
     }
 }
-
-

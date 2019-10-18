@@ -1,30 +1,33 @@
 ﻿using System;
-using LibGit2Sharp;
-using System.IO;
-using GithubFiles.utils;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
+using System.IO;
+using GithubFiles.Utils;
 
 namespace GithubFiles
 {
-    class Program
+    internal class Program
     {
         private static readonly List<string> filesChanges = new List<string>();
-        private const string login = "fileTracker";
-        private const string pass = "trackerpass1";
         private static string path = Environment.CurrentDirectory + "\\Repo";
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             DeleteDirectory(path);
-            Console.Clear();
-            Console.WriteLine("Input reository url \nFor example(https://github.com/ILeshkevuch/test.git)");
+
+            Console.Write("Input\n" +
+                "Github login: ");
+            var login = Console.ReadLine();
+            Console.Write("Github password: ");
+            var pass = Console.ReadLine();
+            Console.WriteLine("Input reository url \n" +
+                "For example(https://github.com/ILeshkevuch/test.git)");
             var url = Console.ReadLine();
 
-            Git.Clone(url,login,pass,path);
-
+            Git.Clone(url, login, pass, path);
             Git.Log(path, filesChanges);
 
-            Printer.Print(Sorter.Sort(filesChanges));
+            Printer.PrintMostPopularFiles(Sorter.GroupByFileName(filesChanges));
 
             DeleteDirectory(path);
         }
@@ -52,12 +55,7 @@ namespace GithubFiles
 
             File.SetAttributes(directoryPath, FileAttributes.Normal);
 
-            Directory.Delete(directoryPath,false);
+            Directory.Delete(directoryPath, false);
         }
-
-        
-
-        
-    
     }
 }
